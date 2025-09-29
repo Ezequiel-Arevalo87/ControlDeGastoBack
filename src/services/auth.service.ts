@@ -1,4 +1,4 @@
-import { UserModel } from '../models/User.model';
+import { UserDoc, UserModel } from '../models/User.model';
 // src/services/auth.service.ts
 import bcrypt from 'bcryptjs';
 
@@ -16,4 +16,10 @@ export async function validateUser(email: string, password: string) {
   if (!user) return null;
   const ok = await bcrypt.compare(password, user.passwordHash);
   return ok ? user : null;
+}
+
+
+
+export async function findUserById(id: string): Promise<UserDoc | null> {
+  return UserModel.findById(id); // DOC
 }
